@@ -5,13 +5,13 @@
 Vecteur::Vecteur(){
 //Constructeur vide
 N_ = 0;
-coef_ = std::vector(); //vector() ou bien coef_() ? pour utiliser le constructeur par default de std::vector
+coef_ = std::vector<double>(); //vector() ou bien coef_() ? pour utiliser le constructeur par default de std::vector
 }
 
 Vecteur::Vecteur(int N){
 //Constructeur du vecteur nul de taille N
 N_ = N ;
-coef_ = std::vector( N, 0);//coef_ = 0;
+coef_ = std::vector<double>( N, 0);//coef_ = 0;
 }
 
 Vecteur::Vecteur(const Vecteur &v){
@@ -20,17 +20,17 @@ N_ = v.N_ ;
 coef_ = v.coef_ ;
 }
 
-Vecteur::size(){
+int Vecteur::size() const {
     return N_ ;
 }
 
-Vecteur::operator() (int i){//acces a la reference
-    return coef_(i);
+double & Vecteur::operator() (int i){//acces a la reference
+    return coef_[i];
 
 }
 
-Vecteur::operator() (int i) const{//acces a la valeur
-    return coef_(i);
+double Vecteur::operator() (int i) const{//acces a la valeur
+    return coef_[i];
 }
 std::ostream & operator<<(std::ostream &os, const Vecteur& v)
 {
