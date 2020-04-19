@@ -1,8 +1,7 @@
 // Fichier include/vecteur.hpp
 #pragma once
 #include<vector> // pour les std::vector
-#include <ostream>
-
+#include <iostream>
 class Vecteur{
 private:
   int N_;
@@ -23,3 +22,11 @@ public:
 };
 
 std::ostream & operator<<(std::ostream &os, const Vecteur& v);
+// En dehors de la classe Vecteur
+Vecteur operator+(const Vecteur &v, const Vecteur &w);
+
+Vecteur operator-(const Vecteur &v, const Vecteur &w);
+
+Vecteur operator*(double &x, const Vecteur &v);
+
+Vecteur operator*(const Vecteur &v,const Vecteur &w);
