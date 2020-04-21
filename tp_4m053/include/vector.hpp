@@ -11,6 +11,8 @@ public:
   // ...
   Vecteur (); // constructeur vide
   Vecteur (int N); // constructeur créant un vecteur de taille N et rempli de zéros
+  Vecteur (int N, double x); //constructeur
+  Vecteur (int N, std::vector<double> &v); //constructeur
   Vecteur (const Vecteur &v); // constructeur par recopie
   ~Vecteur()=default; // destructeur par défaut
 
@@ -27,6 +29,8 @@ Vecteur operator+(const Vecteur &v, const Vecteur &w);
 
 Vecteur operator-(const Vecteur &v, const Vecteur &w);
 
-Vecteur operator*(double &x, const Vecteur &v);
+Vecteur operator*(double x, const Vecteur &v);
+
+Vecteur operator*(const Vecteur &v,double x);
 
 Vecteur operator*(const Vecteur &v,const Vecteur &w);
