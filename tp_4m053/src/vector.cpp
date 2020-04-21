@@ -1,11 +1,12 @@
 #include "../include/vector.hpp"
 #include <iomanip>
-#include <vector>
+//#include <vector>
+#include <string>
 
 Vecteur::Vecteur(){
 //Constructeur vide
 N_ = 0;
-coef_ = std::vector<double>(); //vector() ou bien coef_() ? pour utiliser le constructeur par default de std::vector
+coef_ = std::vector<double>(); //utiliser le constructeur par default de std::vector
 }
 
 Vecteur::Vecteur(int N){
@@ -32,6 +33,34 @@ Vecteur::Vecteur(const Vecteur &v){
 N_ = v.N_ ;
 coef_ = v.coef_ ;
 }
+Vecteur::Vecteur (const std::string name_file){
+     //constructeur input
+    std::ifstream inFile;
+    std::string buffer;
+    inFile.open(name_file.c_str()); //ouvre le fichier au chemin
+    if (!inFile) {
+        std::cerr << "Unable to open file datafile.txt";
+        std::exit(1);   // call system to stop
+    }
+    /*while (inFile >> x) { //read from the stream
+        ;
+        }*/
+    //inFile >> buffer;
+    int N;
+    inFile >> N;
+    std::vector<double> v(N, 0);
+    for(int i =0;i<N; ++i ){
+        inFile >> buffer;
+        inFile >> v[i];
+
+    }
+    inFile.close(); //close the file
+    N_=N;
+    coef_= v;
+}
+
+
+
 
 int Vecteur::size() const {
     return N_ ;
@@ -45,6 +74,23 @@ double & Vecteur::operator() (int i){//acces a la reference
 double Vecteur::operator() (int i) const{//acces a la valeur
     return coef_[i];
 }
+
+void write_file(const Vecteur &v, const std::string name_file){
+    std::ofstream myfile (name_file);
+    myfile << v.size();
+    myfile << "\n";
+    for(int i=0; i<v.size(); ++i){
+        myfile << i ;
+        myfile << " ";
+        myfile << v(i) ;
+        myfile << "\n";
+
+    }
+    myfile.close();
+
+}
+
+
 std::ostream & operator<<(std::ostream &os, const Vecteur& v)
 {
     for(int i = 0; i<v.size() ; ++i){
@@ -52,8 +98,7 @@ std::ostream & operator<<(std::ostream &os, const Vecteur& v)
     }
     os<< std::endl;
     return os ;
-//std::cout << "v.N_ = " << v.N_ << endl ;
-//std::cout << " v.coef_ = " << v.coef_ << endl ;
+
 
 }
 
@@ -103,10 +148,10 @@ Vecteur operator*(double x, const Vecteur &v){
 
 Vecteur operator*(const Vecteur &v, double x){
     Vecteur w(v.size());
-    std::cout <<"on a bien créer un vecteur "<< std::endl;
+    //std::cout <<"on a bien créer un vecteur "<< std::endl;
     for(int i = 0; i<v.size(); ++i){
         w(i) = x*(v(i)); //attention erreur
-        std::cout <<"w(" << i << ")" << w(i)<< std::endl ; 
+        //std::cout <<"w(" << i << ")" << w(i)<< std::endl ; 
     }
     return w;
 }
@@ -127,3 +172,4 @@ Vecteur operator*(const Vecteur &v,const Vecteur &w){
     }
 
 }
+

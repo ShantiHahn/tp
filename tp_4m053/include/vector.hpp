@@ -2,6 +2,8 @@
 #pragma once
 #include<vector> // pour les std::vector
 #include <iostream>
+#include <fstream>
+
 class Vecteur{
 private:
   int N_;
@@ -14,14 +16,18 @@ public:
   Vecteur (int N, double x); //constructeur
   Vecteur (int N, std::vector<double> &v); //constructeur
   Vecteur (const Vecteur &v); // constructeur par recopie
+  Vecteur (const std::string  name_file); //constructeur input
   ~Vecteur()=default; // destructeur par défaut
+
 
   //methode constante qui renvoie la taille du vecteur
   int size() const;
   //accesseurs
   double & operator() (int i);      // Accès a la reference
   double operator() (int i) const; // Accès a la valeur (recopie)
+
 };
+void write_file(const Vecteur &v, const std::string name_file);
 
 std::ostream & operator<<(std::ostream &os, const Vecteur& v);
 // En dehors de la classe Vecteur
