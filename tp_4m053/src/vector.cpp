@@ -2,6 +2,7 @@
 #include <iomanip>
 //#include <vector>
 #include <string>
+#include <cmath>
 
 Vecteur::Vecteur(){
 //Constructeur vide
@@ -64,6 +65,20 @@ Vecteur::Vecteur (const std::string name_file){
 
 int Vecteur::size() const {
     return N_ ;
+}
+
+std::vector<double> Vecteur::vector() {
+    return coef_;
+}
+
+double Vecteur::norme() const{
+    double norme = 0;
+    for(int i =0; i<N_; i++){
+        norme += (*this)(i);
+
+    }
+
+    return sqrt(norme);
 }
 
 double & Vecteur::operator() (int i){//acces a la reference

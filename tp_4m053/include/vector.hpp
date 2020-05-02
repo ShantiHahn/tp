@@ -22,6 +22,10 @@ public:
 
   //methode constante qui renvoie la taille du vecteur
   int size() const;
+  //methode qui renvoie un vector
+  std::vector<double> vector() ;
+  //norme
+  double norme() const;
   //accesseurs
   double & operator() (int i);      // Accès a la reference
   double operator() (int i) const; // Accès a la valeur (recopie)
@@ -40,3 +44,5 @@ Vecteur operator*(double x, const Vecteur &v);
 Vecteur operator*(const Vecteur &v,double x);
 
 Vecteur operator*(const Vecteur &v,const Vecteur &w);
+
+
